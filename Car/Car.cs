@@ -8,8 +8,9 @@
         public double GasTankLevel { get; set; }
         public double MilesPerGallon { get; set; }
         public double Odometer { get; set; } = 0;
+        public int NumberOfWheels { get; set; }
 
-        public Car(string make, string model, int gasTankSize, double milesPerGallon)
+        public Car(string make, string model, int gasTankSize, double milesPerGallon, int numberOfWheels)
         {
             Make = make;
             Model = model;
@@ -17,6 +18,7 @@
             // Gas tank level defaults to a full tank
             GasTankLevel = gasTankSize;
             MilesPerGallon = milesPerGallon;
+            NumberOfWheels = numberOfWheels;
         }
 
         /**
@@ -39,6 +41,24 @@
             GasTankLevel -= gallonsUsed;
             Odometer += milesAbleToTravel;
         }
+
+        public void AddGas(double gas)
+        {
+            GasTankLevel += gas;
+            if (GasTankLevel > GasTankSize)
+            {
+                throw new System.ArgumentOutOfRangeException("Cant exceed gas tank size");
+            }
+        }
+
+       /* public static double maxGasTank = 10;
+        public void GasInCar(double gasLevel)
+        {
+                if (gasLevel > maxGasTank)
+                {
+                    throw new System.ArgumentOutOfRangeException("Gas tank cannot be above 10 gallons");
+                }
+        }*/
 
     }
 }
